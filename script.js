@@ -1,5 +1,5 @@
 var dateInputRef = document.querySelector('#bday-input');
-var showBtnRef = document.querySelector('#Show-btn');
+var showBtnRef = document.querySelector('#show-btn');
 var resultRef = document.querySelector('#result');
 
 function reverseStr(str){
@@ -49,7 +49,7 @@ function getAllDateFormats(date){
 
     var ddmmyyyy = dateStr.day + dateStr.month + dateStr.year;
     var mmddyyyy = dateStr.month + dateStr.day + dateStr.year;
-    var yyyymmdd = dateStr.year + dateStr.month + dateStr.date;
+    var yyyymmdd = dateStr.year + dateStr.month + dateStr.day;
 
     var ddmmyy = dateStr.day + dateStr.month + dateStr.year.slice(-2);
 
@@ -77,7 +77,7 @@ function checkPalindromeForAllDateFormats(date){
 }
 
 function isleapYear(year){
-    if(year%400 === 0){
+    if(year % 400 === 0){
         return true;
     }
     if(year % 100 === 0){
@@ -146,46 +146,48 @@ function getNextPalindromeDate(date){
 }
 
 
-showBtnRef.addEventListener('click', clickHandler);
 
 function clickHandler(e){
     // console.log(dateInputRef.value);
     var bdayStr = dateInputRef.value;
 
-    if( bdayStr! == ''){
-        var listOfDate = bdayStr.Split('-');
-        var Date = {
-            day:listOfDate(2),
-            month:listOfDate(1),
-            year:listOfDate(0)
-        }
+    if( bdayStr !== ''){
+        var listOfDate = bdayStr.split('-');
+         var date = {
+            day: Number(listOfDate[2]),
+            month: Number(listOfDate[1]),
+            year: Number(listOfDate[0])
+        };
         var isPalindrome = checkPalindromeForAllDateFormats(date);
         if(isPalindrome){
-            resultRef.innerText = 'YaY! your birthday is a palindrome '
+            resultRef.innerText = `YaY! your birthday is a palindrome 😊😊`;
+            // console.log(resultRef);
         }
     } else {
         var[ctr,nextDate] = getNextPalindromeDate(date);
-        resultRef.innerText = 'The Next palindrome is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed iy by ${ctr}day !' ;
-    }
-}
-        console.log(date);
-    }
-}
-
-
-
-var date = {
-    day: 8, month : 8, year: 2021
+        resultRef.innerText = `The Next palindrome is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed it by ${ctr} day 😔😔!`;
+   
+        // console.log(date);
+    }     
+    
 }
 
 
+showBtnRef.addEventListener('click',clickHandler);
 
-console.log(getNextPalindromeDate(date));
-console.log(getNextDate(date));
+
+// var date = {
+//     day: 15, month : 8, year: 2021
+// }
+
+
+
+// console.log(getNextPalindromeDate(date));
 // console.log(getNextDate(date));
-console.log(isleapYear(2021));
-console.log(checkPalindromeForAllDateFormats(date));
-console.log(getAllDateFormats(date));
+// console.log(getNextDate(date));
+// // console.log(isleapYear(2021));
+// console.log(checkPalindromeForAllDateFormats(date));
+// console.log(getAllDateFormats(date));
 
 
 // var date = { day:15, month:10, year:2020}
