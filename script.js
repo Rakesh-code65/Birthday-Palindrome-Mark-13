@@ -16,7 +16,7 @@ function reverseStr(str){
 function isPalindrome(str){
      
   var reverse = reverseStr(str);
-  return str === reverse
+  return str === reverse;
   
 }
 
@@ -149,6 +149,8 @@ function getNextPalindromeDate(date){
 
 function clickHandler(e){
     // console.log(dateInputRef.value);
+    e.preventDefault();
+    console.log("clicked");
     var bdayStr = dateInputRef.value;
 
     if( bdayStr !== ''){
@@ -158,20 +160,25 @@ function clickHandler(e){
             month: Number(listOfDate[1]),
             year: Number(listOfDate[0])
         };
+    console.log(date.month);
+
         var isPalindrome = checkPalindromeForAllDateFormats(date);
         if(isPalindrome){
+        console.log(isPalindrome);
+
             resultRef.innerText = `YaY! your birthday is a palindrome 😊😊`;
             // console.log(resultRef);
         }
-    } else {
+     else {
+        console.log(isPalindrome);
         var[ctr,nextDate] = getNextPalindromeDate(date);
         resultRef.innerText = `The Next palindrome is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed it by ${ctr} day 😔😔!`;
    
         // console.log(date);
-    }     
+    }
+}     
     
 }
-
 
 showBtnRef.addEventListener('click',clickHandler);
 
